@@ -6,10 +6,20 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { UserModule } from './user/user.module';
+import { User } from './user/user.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot(),   
+      TypeOrmModule.forRoot({
+        "type":"postgres",
+        "host": "localhost",
+        "port": 5432,
+        "username":  "Robson",
+        "password": "624272",
+        "database": "nest_test",
+        "entities": [],
+        "synchronize": true
+        }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
