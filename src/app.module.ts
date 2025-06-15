@@ -17,7 +17,7 @@ import { User } from './user/user.entity';
         "username":  "Robson",
         "password": "624272",
         "database": "nest_test",
-        "entities": [],
+        "entities": [User],
         "synchronize": true
         }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
