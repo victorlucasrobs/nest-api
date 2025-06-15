@@ -7,16 +7,16 @@ import { join } from 'path';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { UserModule } from './user/user.module';
 import { User } from './user/user.entity';
-
+import "dotenv/config"
 @Module({
   imports: [
       TypeOrmModule.forRoot({
         "type":"postgres",
-        "host": "localhost",
-        "port": 5432,
-        "username":  "Robson",
-        "password": "624272",
-        "database": "nest_test",
+        "host": process.env.HOST,
+        "port": parseInt( "process.env.DB_PORT" ),
+        "username": process.env.DB_USERNAME,
+      "password": process.env.DB_PASSWORD,
+        "database": process.env.DATABASE,
         "entities": [User],
         "synchronize": true
         }),
