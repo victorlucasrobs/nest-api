@@ -5,6 +5,7 @@ export default class TestUtil {
         user.email = "validator@email.com";
         user.name = "validator"
         user.id = "1"
+        user.password ="12346"
         return user;
     }
 }

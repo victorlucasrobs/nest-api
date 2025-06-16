@@ -76,20 +76,22 @@ describe('UserService', () => {
   describe("create user", ()=>{
     it("should create a user",async()=>{
       const user = TestUtil.giveMeAvaliduser();
-      mockRepository.save.mockReturnValue(user);
-      mockRepository.create.mockReturnValue(user);
-      const saveUser = await service.createUser(user);
-      expect(saveUser).toMatchObject(user);
+      const userToCreate = { name: user.name, email: user.email, password: 'testpassword' };
+      mockRepository.save.mockReturnValue(userToCreate);
+      mockRepository.create.mockReturnValue(userToCreate);
+      const saveUser = await service.createUser(userToCreate);
+      expect(saveUser).toMatchObject(userToCreate);
       expect(mockRepository.create).toBeCalledTimes(1);
       expect(mockRepository.save).toBeCalledTimes(1);
     });
   
   it("should return a exception when doesnt create a user", async () =>{
     const user = TestUtil.giveMeAvaliduser();
+      const userToCreate = { name: user.name, email: user.email, password: 'testpassword' };
       mockRepository.save.mockReturnValue(user);
       mockRepository.create.mockReturnValue(user);
 
-      await service.createUser(user).catch(e=> {
+      await service.createUser(userToCreate).catch(e=> {
         expect(e).toBeInstanceOf(InternalServerErrorException);
         expect(e).toMatchObject({message: "problem in the  creation of the user",});
       });

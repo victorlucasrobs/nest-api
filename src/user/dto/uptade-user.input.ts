@@ -12,4 +12,10 @@ export class UpdateUserInput {
   @IsOptional()
   @IsNotEmpty({ message: ' this not stay empty' })
   email?: string;
+
+  @IsString()
+  @IsOptional()
+  @IsNotEmpty({ message: ' Password is required' })
+  password?: string;
+
 }
