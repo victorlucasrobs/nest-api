@@ -3,6 +3,8 @@ import { UserService } from './user.service';
 import { CreateUserInput } from './dto/create-user.input';
 import { User } from './user.entity';
 import { UpdateUserInput } from './dto/uptade-user.input';
+import { UseGuards } from '@nestjs/common';
+import { GqlAuthGuard } from 'src/auth/auth.guard';
 
 @Resolver()
 export class UserResolver {
@@ -14,6 +16,7 @@ export class UserResolver {
     return users;
   }
 
+  @UseGuards(GqlAuthGuard)
   @Query(() => User)
   async user(
     @Args("id") id: string

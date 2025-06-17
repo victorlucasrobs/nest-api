@@ -7,6 +7,7 @@ import { join } from 'path';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { UserModule } from './user/user.module';
 import { User } from './user/user.entity';
+import { AuthModule } from './auth/auth.module';
 import "dotenv/config"
 @Module({
   imports: [
@@ -23,8 +24,10 @@ import "dotenv/config"
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      context:({req}) =>([req]),
     }),
-    UserModule
+    UserModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
